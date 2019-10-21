@@ -9,8 +9,8 @@ type Props = {
     timeout: number,
     className?: string,
     children?: any,
-    onClick?: Function,
-    disabled?: boolean
+    disabled?: boolean,
+    onClick?: Function
 };
 
 export default React.memo<Props>(function (props: Props) {
@@ -18,8 +18,8 @@ export default React.memo<Props>(function (props: Props) {
         timeout,
         className,
         children,
-        onClick,
         disabled,
+        onClick,
         ...rest
     } = props;
 
@@ -28,25 +28,6 @@ export default React.memo<Props>(function (props: Props) {
     const [running, setRunning] = React.useState(false);
 
     React.useEffect(() => {
-        // let timer = null;
-        // const run = () => {
-        //     if (timer) {
-        //         clearTimeout(timer);
-        //     }
-        //     if (time <= 0) {
-        //         setRunning(false);
-        //         return;
-        //     }
-        //     timer = setTimeout(() => {
-        //         setTime(time - 1000);
-        //     }, 1000);
-        // };
-        // running && run();
-        // return () => {
-        //     if (timer) {
-        //         clearTimeout(timer);
-        //     }
-        // }
         let timer = null;
         if (running) {
             timer = setTimeout(() => {
@@ -65,18 +46,23 @@ export default React.memo<Props>(function (props: Props) {
         }
     }, [running, time]);
 
-    const renderChildren = () => {
+    const renderCountdown = React.useCallback(() => {
         if (running) {
-            return `${time / 1000}秒`;
+            return (
+                <span className="pure-button-timeout-countdown">{time / 1000}秒</span>
+            )
         }
-        return children;
-    }
+        return null;
+    }, [running, time]);
 
-    return <button className={classnames("pure-button", className)}
-                   type="button"
+    return <button {...rest}
+                   className={classnames("pure-button", running && "pure-button-timeout-running", className)}
                    onClick={(...args) => {
                        setRunning(true);
                        onClick && onClick(...args);
                    }}
-                   disabled={disabled || running}>{renderChildren()}</button>
+                   disabled={disabled || running}>
+        <span>{children}</span>
+        {renderCountdown()}
+    </button>
 });

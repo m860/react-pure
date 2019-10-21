@@ -6,6 +6,7 @@
 import React from 'react';
 import {action} from '@storybook/addon-actions';
 import PromiseButton from "../buttons/PromiseButton";
+import TimeoutButton from "../buttons/TimeoutButton";
 
 export default {
     title: "Button"
@@ -36,3 +37,11 @@ export const promiseButtonTimeout = () => {
         </div>
     )
 };
+
+export const timeoutButton = () => {
+    return (
+        <div>
+            <TimeoutButton timeout={20 * 1000}>倒计时10s</TimeoutButton>
+        </div>
+    )
+}
