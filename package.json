@@ -22,8 +22,11 @@
   "dependencies": {
     "animate.css": "^3.7.2",
     "classnames": "^2.2.6",
+    "fbemitter": "^2.1.1",
     "font-awesome": "^4.7.0",
-    "purecss": "^1.0.1"
+    "immutability-helper": "^3.0.1",
+    "purecss": "^1.0.1",
+    "uuid": "^3.3.3"
   },
   "peerDependencies": {
     "react": ">=16.8.*"
