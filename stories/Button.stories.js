@@ -14,29 +14,24 @@ export default {
 
 export const promiseButton = () => {
     return (
-        <PromiseButton onPromise={() => {
-            return new Promise((resolve) => {
-                setTimeout(resolve, 1000);
-            })
-        }}>Promise Button</PromiseButton>
-    )
-}
-
-export const promiseButtonTimeout = () => {
-    return (
         <div>
+            <PromiseButton onPromise={() => {
+                return new Promise((resolve) => {
+                    setTimeout(resolve, 1000);
+                })
+            }}>Promise Button</PromiseButton>
             <PromiseButton onPromise={() => {
                 return new Promise(() => {
                 })
-            }}>Promise Button timeout after 5s(default value)</PromiseButton>
+            }}>5秒超时(5秒是默认值)</PromiseButton>
             <PromiseButton timeout={2000}
                            onPromise={() => {
                                return new Promise(() => {
                                })
-                           }}>Promise Button timeout 2s</PromiseButton>
+                           }}>2秒超时</PromiseButton>
         </div>
     )
-};
+}
 
 export const timeoutButton = () => {
     return (
