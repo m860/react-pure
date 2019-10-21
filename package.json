@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
-    "cm":"git-cz"
+    "cm": "git-cz"
   },
   "repository": {
     "type": "git",
@@ -20,7 +20,10 @@
   },
   "homepage": "https://github.com/m860/react-pure#readme",
   "dependencies": {
-    "classnames": "^2.2.6"
+    "animate.css": "^3.7.2",
+    "classnames": "^2.2.6",
+    "font-awesome": "^4.7.0",
+    "purecss": "^1.0.1"
   },
   "peerDependencies": {
     "react": ">=16.8.*"
@@ -33,9 +36,13 @@
     "@storybook/react": "^5.2.4",
     "babel-loader": "^8.0.6",
     "commitizen": "^4.0.3",
+    "css-loader": "^3.2.0",
     "cz-conventional-changelog": "^3.0.2",
     "flow-bin": "^0.109.0",
-    "react": "^16.10.2"
+    "node-sass": "^4.12.0",
+    "react": "^16.10.2",
+    "sass-loader": "^8.0.0",
+    "style-loader": "^1.0.0"
   },
   "config": {
     "commitizen": {

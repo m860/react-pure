@@ -31,7 +31,7 @@ export default React.memo<Props>(function (props: Props) {
         let timer = null;
         if (effect && timeout > 0) {
             // start
-            timer = setTimeout(() => onTimeout && onTimeout, timeout)
+            timer = setTimeout(() => onTimeout && onTimeout(), timeout)
         }
         return () => {
             if (timer) {
@@ -41,7 +41,7 @@ export default React.memo<Props>(function (props: Props) {
     }, [effect]);
 
 
-    const renderEffect = () => {
+    const renderEffect = React.useCallback(() => {
         if (effect) {
             return (
                 <div className="pure-effect-spinner">
@@ -50,7 +50,7 @@ export default React.memo<Props>(function (props: Props) {
             )
         }
         return null;
-    }
+    }, [effect]);
 
     return <button {...rest}
                    className={classnames("pure-button", className, effect && "pure-button-effect")}

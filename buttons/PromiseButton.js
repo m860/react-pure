@@ -8,31 +8,38 @@ import useMounted from "../hooks/useMounted";
 
 type Props = {
     onPromise: ()=>Promise<*>,
-    onClick?: Function
+    timeout?: number,
 };
 
 export default React.memo<Props>(function (props: Props) {
 
     const {
         onPromise,
-        onClick,
+        timeout = 5 * 1000,
         ...rest
     } = props;
 
     const mounted = useMounted();
     const [effect, setEffect] = React.useState<boolean>(false);
+
+    const clickHandler = React.useCallback(async () => {
+        setEffect(true);
+        try {
+            await onPromise();
+        } catch (ex) {
+        }
+        if (mounted.current) {
+            setEffect(false);
+        }
+    }, [mounted]);
+
+    const timeoutHandler = React.useCallback(() => setEffect(false), []);
+
     return (
         <EffectButton {...rest}
                       effect={effect}
-                      onClick={async () => {
-                          setEffect(true);
-                          try {
-                              await onPromise();
-                          } catch (ex) {
-                          }
-                          if (mounted.current) {
-                              setEffect(false);
-                          }
-                      }}/>
+                      onClick={clickHandler}
+                      timeout={timeout}
+                      onTimeout={timeoutHandler}/>
     )
 });
