@@ -1,9 +1,10 @@
-import {configure,addParameters} from '@storybook/react';
+import {configure, addParameters} from '@storybook/react';
 import "../index"
 
 addParameters({
-    options:{
-        name:"React-Pure"
+    options: {
+        name: "React-Pure",
+        showAddonPanel: false
     }
 })
 
