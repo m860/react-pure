@@ -10,7 +10,8 @@ type Props = {
     className?: string,
     children?: any,
     disabled?: boolean,
-    onClick?: Function
+    onClick?: Function,
+    renderCountdown?: (value: number)=>any
 };
 
 export default React.memo<Props>(function (props: Props) {
@@ -20,6 +21,7 @@ export default React.memo<Props>(function (props: Props) {
         children,
         disabled,
         onClick,
+        renderCountdown = (value: number) => `${value}秒`,
         ...rest
     } = props;
 
@@ -46,10 +48,10 @@ export default React.memo<Props>(function (props: Props) {
         }
     }, [running, time]);
 
-    const renderCountdown = React.useCallback(() => {
+    const _renderCountdown = React.useCallback(() => {
         if (running) {
             return (
-                <span className="pure-button-timeout-countdown">{time / 1000}秒</span>
+                <span className="pure-button-timeout-countdown">{renderCountdown(time / 1000)}</span>
             )
         }
         return null;
@@ -63,6 +65,6 @@ export default React.memo<Props>(function (props: Props) {
                    }}
                    disabled={disabled || running}>
         <span>{children}</span>
-        {renderCountdown()}
+        {_renderCountdown()}
     </button>
 });

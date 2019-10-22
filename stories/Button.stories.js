@@ -12,6 +12,17 @@ export default {
     title: "Button"
 }
 
+export const button = () => {
+    return (
+        <div>
+            <button className="pure-button">Default Button</button>
+            <button className="pure-button pure-button-primary">Primary Button</button>
+            <button className="pure-button pure-button-danger">Danger Button</button>
+            <button className="pure-button pure-button-primary">Icon Button <i className="fa fa-upload"></i></button>
+        </div>
+    )
+}
+
 export const promiseButton = () => {
     return (
         <div>
@@ -28,7 +39,7 @@ export const promiseButton = () => {
                            onPromise={() => {
                                return new Promise(() => {
                                })
-                           }}>2秒超时</PromiseButton>
+                           }}>2秒超时 <i className="fa fa-check-circle"></i></PromiseButton>
         </div>
     )
 }
@@ -37,6 +48,8 @@ export const timeoutButton = () => {
     return (
         <div>
             <TimeoutButton timeout={20 * 1000}>倒计时10s</TimeoutButton>
+            <TimeoutButton timeout={20 * 1000}
+                           renderCountdown={(value) => `剩余${value}秒`}>倒计时10s(自定义countdown)</TimeoutButton>
         </div>
     )
 }
