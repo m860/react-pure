@@ -6,7 +6,8 @@ import * as React from "react"
 import Toast, {error, info, warn} from "../other/Toast";
 
 export default {
-    title: "Other"
+    title: "Other",
+    component: Toast
 }
 
 export const toast = () => {
