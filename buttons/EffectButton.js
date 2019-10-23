@@ -45,7 +45,7 @@ export default React.memo<Props>(function (props: Props) {
         if (effect) {
             return (
                 <div className="pure-effect-spinner">
-                    <i className="fa fa-spinner animated infinite rotateIn"></i>
+                    <i className="fa fa-spinner animated infinite linear-rotate"></i>
                 </div>
             )
         }
