@@ -108,7 +108,7 @@ export const ToastItemTypes = {
 export type ToastItem = {
     key: string,
     type: $Values<typeof ToastItemTypes>,
-    message: string,
+    message: any,
     timeout: number,
     callback?: Promise<*>
 };
@@ -117,7 +117,7 @@ const emitter = new EventEmitter();
 
 const KEY_APPEND_ITEM = "AppendItem";
 
-export function info(message: string, rest: $Shape<ToastItem> = {}) {
+export function info(message: any, rest: $Shape<ToastItem> = {}) {
     const item: ToastItem = {
         key: uuid(),
         timeout: 3000,
@@ -129,7 +129,7 @@ export function info(message: string, rest: $Shape<ToastItem> = {}) {
     emitter.emit(KEY_APPEND_ITEM, item);
 }
 
-export function warn(message: string, rest: $Shape<ToastItem> = {}) {
+export function warn(message: any, rest: $Shape<ToastItem> = {}) {
     const item: ToastItem = {
         key: uuid(),
         timeout: 3000,
@@ -140,7 +140,7 @@ export function warn(message: string, rest: $Shape<ToastItem> = {}) {
     emitter.emit(KEY_APPEND_ITEM, item);
 }
 
-export function error(message: string, rest: $Shape<ToastItem> = {}) {
+export function error(message: any, rest: $Shape<ToastItem> = {}) {
     const item: ToastItem = {
         key: uuid(),
         timeout: 3000,
