@@ -1,5 +1,4 @@
 /**
- * @flow
  * @author Jean.h.ma 2019-10-21
  */
 const path = require('path');
