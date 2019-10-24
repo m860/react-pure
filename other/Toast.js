@@ -24,7 +24,9 @@ export default React.memo<Props>(function (props: Props) {
         if (items.length > 0) {
             timer = setInterval(() => {
                 const nextItems = items.filter(f => f.expire >= Date.now());
-                setItems(nextItems);
+                if (nextItems.length !== items.length) {
+                    setItems(nextItems);
+                }
             }, 1000);
         }
 
@@ -37,15 +39,15 @@ export default React.memo<Props>(function (props: Props) {
     }, [items]);
 
     return (
-        <div className="pure-toast">
+        <span className="pure-toast">
             {items.map((item: ToastItem, index: number) => {
                 return (
-                    <div className={`pure-toast-item pure-toast-item-${item.type}`} key={item.id}>
-                        <span>{item.message}</span>
+                    <div className={`pure-toast-item`} key={item.key}>
+                        <span className={`pure-toast-item-${item.type}`}>{item.message}</span>
                     </div>
                 );
             })}
-        </div>
+        </span>
     )
 });
 
@@ -56,7 +58,7 @@ export const ToastItemTypes = {
 };
 
 export type ToastItem = {
-    id: string,
+    key: string,
     type: $Values<typeof ToastItemTypes>,
     message: string,
     timeout: number
@@ -68,7 +70,7 @@ const KEY_APPEND_ITEM = "AppendItem";
 
 export function info(message: string, rest: $Shape<ToastItem> = {timeout: 3000}) {
     const item: ToastItem = {
-        id: uuid(),
+        key: uuid(),
         ...rest,
         message,
         type: ToastItemTypes.info,
@@ -79,7 +81,7 @@ export function info(message: string, rest: $Shape<ToastItem> = {timeout: 3000})
 
 export function warn(message: string, rest: $Shape<ToastItem> = {timeout: 3000}) {
     const item: ToastItem = {
-        id: uuid(),
+        key: uuid(),
         ...rest,
         message,
         type: ToastItemTypes.warn,
@@ -89,7 +91,7 @@ export function warn(message: string, rest: $Shape<ToastItem> = {timeout: 3000})
 
 export function error(message: string, rest: $Shape<ToastItem> = {timeout: 3000}) {
     const item: ToastItem = {
-        id: uuid(),
+        key: uuid(),
         ...rest,
         type: ToastItemTypes.error,
         message
