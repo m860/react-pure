@@ -12,7 +12,7 @@ type Props = {
     disabled?: boolean,
     multiple?: boolean,
     // 上传进度0～100
-    progress?: ?number
+    progress?: number
 };
 
 export default React.memo<Props>(function (props: Props) {
