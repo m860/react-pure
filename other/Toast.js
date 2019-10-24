@@ -11,42 +11,27 @@ type Props = {}
 
 export default React.memo<Props>(function (props: Props) {
 
-    const [items, setItems] = React.useState<Array<ToastItem & {
-        expire: number,
-    }>>([]);
+    const [items, setItems] = React.useState<Array<ToastItemExt>>([]);
 
     const callbackQueue = React.useRef<Array<{
         key: string,
         callback: Function
     }>>([]);
 
-    const executed = React.useRef<string>([]);
-
-    // const removeItem = React.useCallback((key: string) => {
-    //     console.log(JSON.stringify(items));
-    //     const index = items.findIndex(f => f.key === key);
-    //     if (index >= 0) {
-    //         setItems(
-    //             update(items, {
-    //                 [index]: {
-    //                     expire: {$set: Date.now()}
-    //                 }
-    //             })
-    //         )
-    //     }
-    // }, [items]);
+    const executed = React.useRef<Array<string>>([]);
 
     React.useEffect(() => {
         const append = (item: ToastItem) => {
-            let nextItem = {...item};
+            let nextItem: ToastItemExt = {
+                ...item,
+                expire: Date.now() + item.timeout
+            };
             if (item.callback) {
                 nextItem.expire = Date.now() + 24 * 60 * 60 * 1000;
                 callbackQueue.current.push({
                     key: item.key,
                     callback: item.callback
                 });
-            } else {
-                nextItem.expire = Date.now() + item.timeout;
             }
             setItems(update(items, {
                 $push: [nextItem]
@@ -58,7 +43,6 @@ export default React.memo<Props>(function (props: Props) {
         let timer = null;
         if (items.length > 0) {
             timer = setInterval(() => {
-                console.log("loop", executed.current.length)
                 const nextItems = items.filter(f => {
                     if (f.callback) {
                         return executed.current.indexOf(f.key) < 0
@@ -112,6 +96,10 @@ export type ToastItem = {
     timeout: number,
     callback?: Promise<*>
 };
+
+export type ToastItemExt = ToastItem & {
+    expire: number
+}
 
 const emitter = new EventEmitter();
 
