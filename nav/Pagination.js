@@ -21,7 +21,7 @@ export default React.memo<Props>(function (props: Props) {
         pageSize = 20,
         total = 0,
         onChange,
-        displayPages = 9
+        displayPages = 7
     } = props;
 
     const [totalPage, setTotalPage] = useSafeState<number>(Math.ceil(total / pageSize));
@@ -29,13 +29,26 @@ export default React.memo<Props>(function (props: Props) {
     React.useEffect(() => {
         const h = Math.floor(displayPages / 2);
         let min = pageIndex - h;
-        if (min < 1) {
-            min = 1;
-        }
         let max = pageIndex + h;
-        if (max > totalPage) {
-            max = totalPage;
+
+        if (min < 1) {
+            const diff = 1 - min;
+            min += diff;
+            max += diff;
+            if (max > totalPage) {
+                max = totalPage;
+            }
         }
+
+        if (max > totalPage) {
+            const diff = totalPage - max;
+            min += diff;
+            max += diff;
+            if (min < 1) {
+                min = 1;
+            }
+        }
+
         let nextPages = [];
         for (let i = min; i <= max; i++) {
             nextPages.push(i);
