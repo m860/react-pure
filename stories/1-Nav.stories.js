@@ -13,6 +13,11 @@ export const pagination = () => {
     const [index, setIndex] = React.useState(1);
     const [size, setSize] = React.useState(10);
     const [total, setTotal] = React.useState(20);
+
+    React.useEffect(() => {
+        setIndex(1);
+    }, [total])
+
     return (
         <div className="pure-g">
             <div className="pure-u-1">

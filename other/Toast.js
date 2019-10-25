@@ -94,7 +94,7 @@ export type ToastItem = {
     type: $Values<typeof ToastItemTypes>,
     message: any,
     timeout: number,
-    callback?: Promise<*>
+    callback?: ()=>Promise<*>
 };
 
 export type ToastItemExt = ToastItem & {
@@ -139,7 +139,7 @@ export function error(message: any, rest: $Shape<ToastItem> = {}) {
     emitter.emit(KEY_APPEND_ITEM, item);
 }
 
-export function promiseToast(callback: Promise<*>, rest: $Shape<ToastItem> = {}) {
+export function promiseToast(callback: ()=>Promise<*>, rest: $Shape<ToastItem> = {}) {
     const item: ToastItem = {
         key: uuid(),
         type: ToastItemTypes.info,
