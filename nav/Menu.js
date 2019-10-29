@@ -58,7 +58,7 @@ export default React.memo<Props>(function (props: Props) {
         return null;
     }, [heading]);
 
-    const renderChildren = React.useCallback((item: MenuItem, index: number) => {
+    const renderChildren = React.useCallback((item: MenuItem, index: number, rootIndex: number) => {
         if (item.children && item.children.length > 0) {
             return (
                 <ul className="pure-menu-children">
@@ -73,8 +73,9 @@ export default React.memo<Props>(function (props: Props) {
                                 key={childIndex}>
                                 <a href={child.path}
                                    style={child.style}
+                                   onClick={() => menuClick(rootIndex)}
                                    className={classnames("pure-menu-link", item.className)}>{child.text}</a>
-                                {renderChildren(child, childIndex)}
+                                {renderChildren(child, childIndex, rootIndex)}
                             </li>
                         );
                     })}
@@ -106,7 +107,7 @@ export default React.memo<Props>(function (props: Props) {
                                style={item.style}
                                onClick={() => menuClick(index)}
                                className={classnames("pure-menu-link", item.className)}>{item.text}</a>
-                            {renderChildren(item, index)}
+                            {renderChildren(item, index, index)}
                         </li>
                     )
                 })}

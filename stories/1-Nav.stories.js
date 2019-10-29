@@ -76,15 +76,15 @@ export const menu = () => {
                       },
                       {
                           text: "menu4",
-                          path: "",
+                          path: "javascript:void(0)",
                           children: [
                               {
                                   text: "menu4-1",
-                                  path: "",
+                                  path: "javascript:void(0)",
                                   children: [
                                       {
                                           text: "menu4-1-1",
-                                          path: ""
+                                          path: "javascript:void(0)"
                                       }
                                   ]
                               }
