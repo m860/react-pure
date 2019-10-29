@@ -2,7 +2,7 @@
 
 基于PureCSS实现的一套React组件库
 
-[react-pure storybook](https://m860.github.io/react-pure)
+[Online Example](https://m860.github.io/react-pure)
 
 ## Icon
 
