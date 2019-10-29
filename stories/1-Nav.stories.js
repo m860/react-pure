@@ -4,10 +4,7 @@
  */
 import * as React from "react"
 import Pagination from "../nav/Pagination";
-import Layout from "../layout/Layout";
-import Slider from "../layout/Slider";
-import Content from "../layout/Content";
-import VerticalMenu from "../nav/VerticalMenu";
+import Menu from "../nav/Menu";
 
 export default {
     title: "Nav"
@@ -48,7 +45,7 @@ export const pagination = () => {
     )
 }
 
-export const sliderMenu = () => {
+export const menu = () => {
     const [width, setWidth] = React.useState(800);
     const [height, setHeight] = React.useState(600);
     React.useEffect(() => {
@@ -56,17 +53,103 @@ export const sliderMenu = () => {
         setHeight(window.screen.availHeight);
     }, []);
     return (
-        <Layout className="flex-1 flex-row" style={{width, height}}>
-            <Slider style={{backgroundColor: "black"}}>
-                <VerticalMenu heading={{text: "MenuHeading", path: "#"}}
-                              items={[
-                                  {text: "menu1", path: "#", active: true},
-                                  {text: "menu2", path: "#"},
-                                  {text: "menu3", path: "#"},
-                              ]}/>
-            </Slider>
-            <Content className="flex-1"></Content>
-        </Layout>
+        <>
+            <h3>菜单</h3>
+            <Menu heading={{text: "HEADING", path: "#"}}
+                  style={{width: 150}}
+                  items={[
+                      {text: "disabled menu", disable: true, path: "javascript:void(0)"},
+                      {text: "menu2", path: "javascript:void(0)"},
+                      {text: "menu3", path: "javascript:void(0)"},
+                  ]}/>
+            <h3>菜单（包含子菜单）</h3>
+            <Menu heading={{text: "HEADING", path: "#"}}
+                  style={{width: 150}}
+                  items={[
+                      {text: "menu1", path: "javascript:void(0)"},
+                      {text: "menu2", path: "javascript:void(0)"},
+                      {
+                          text: "DontAllowHover",
+                          path: "javascript:void(0)",
+                          allowHover: false,
+                          children: [{text: "menu3-1", path: ""}]
+                      },
+                      {
+                          text: "menu4",
+                          path: "",
+                          children: [
+                              {
+                                  text: "menu4-1",
+                                  path: "",
+                                  children: [
+                                      {
+                                          text: "menu4-1-1",
+                                          path: ""
+                                      }
+                                  ]
+                              }
+                          ]
+                      }
+                  ]}/>
+            <h3>水平菜单</h3>
+            <Menu heading={{text: "HEADING", path: "#"}}
+                  horizontal={true}
+                  items={[
+                      {text: "disabled menu", disable: true, path: "javascript:void(0)"},
+                      {text: "menu2", path: "javascript:void(0)"},
+                      {text: "menu3", path: "javascript:void(0)"},
+                  ]}/>
+            <h3>水平菜单（包含子菜单）</h3>
+            <Menu heading={{text: "HEADING", path: "#"}}
+                  horizontal={true}
+                  items={[
+                      {text: "menu1", path: "javascript:void(0)"},
+                      {text: "menu2", path: "javascript:void(0)"},
+                      {
+                          text: "menu3",
+                          path: "javascript:void(0)",
+                          children: [{text: "menu3-1", path: ""}]
+                      },
+                      {
+                          text: "menu4",
+                          path: "",
+                          children: [
+                              {
+                                  text: "menu4-1",
+                                  path: "",
+                                  children: [
+                                      {
+                                          text: "menu4-1-1",
+                                          path: ""
+                                      }
+                                  ]
+                              }
+                          ]
+                      }
+                  ]}/>
+            <h3>可滚动菜单</h3>
+            <Menu heading={{text: "HEADING", path: "#"}}
+                  horizontal={true}
+                  scrollable={true}
+                  style={{width: 200}}
+                  items={[
+                      {text: "menu1", path: "javascript:void(0)"},
+                      {text: "menu2", path: "javascript:void(0)"},
+                      {text: "menu3", path: "javascript:void(0)"},
+                      {text: "menu4", path: "javascript:void(0)"},
+                      {text: "menu5", path: "javascript:void(0)"},
+                      {text: "menu6", path: "javascript:void(0)"},
+                      {text: "menu7", path: "javascript:void(0)"},
+                      {text: "menu8", path: "javascript:void(0)"},
+                  ]}/>
+            <h3>NO HEADING</h3>
+            <Menu horizontal={true}
+                  items={[
+                      {text: "menu1", path: "javascript:void(0)"},
+                      {text: "menu2", path: "javascript:void(0)"},
+                  ]}/>
+            <div style={{height: 300}}></div>
+        </>
     )
 }
 
