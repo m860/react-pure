@@ -47,3 +47,46 @@ export const slider = () => {
         </Layout>
     )
 }
+
+export const layout2 = () => {
+    const [width, setWidth] = React.useState(800);
+    const [height, setHeight] = React.useState(600);
+    React.useEffect(() => {
+        setWidth(document.documentElement.clientWidth);
+        setHeight(document.documentElement.clientHeight);
+    }, []);
+    return (
+        <Layout className="flex-1 flex-col" style={{width, height}}>
+            <Header style={{padding: "0.5em 0", textAlign: "left"}}>
+                <Menu heading={{text: "HEADING", path: "#"}}
+                      horizontal={true}
+                      items={[
+                          {text: "menu1", path: "#"},
+                          {text: "menu1", path: "#"},
+                          {text: "menu1", path: "#"},
+                          {text: "menu1", path: "#"},
+                          {text: "menu1", path: "#"},
+                          {text: "menu1", path: "#"},
+                          {text: "menu1", path: "#"},
+                      ]}/>
+            </Header>
+            <Layout className="flex-1 flex-row">
+                <Slider style={{backgroundColor: "#cccccc"}}>
+                    <Menu style={{width: "100%"}}
+                          items={[
+                              {text: "menu1", path: "#"},
+                              {text: "menu1", path: "#"},
+                              {text: "menu1", path: "#"},
+                              {text: "menu1", path: "#"},
+                              {text: "menu1", path: "#"},
+                              {text: "menu1", path: "#"},
+                              {text: "menu1", path: "#"},
+                          ]}/>
+                </Slider>
+                <Layout>
+
+                </Layout>
+            </Layout>
+        </Layout>
+    )
+}
