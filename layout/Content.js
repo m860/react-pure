@@ -17,6 +17,6 @@ export default React.memo<Props>(function (props: Props) {
         ...rest
     } = props;
     return (
-        <div className={classnames("flex", className)} {...rest}>{children}</div>
+        <div className={classnames("content", className)} {...rest}>{children}</div>
     );
 });
